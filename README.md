@@ -74,3 +74,240 @@ Ninus-->Módulo_Analise_Semanal
 Módulo_Analise_Semanal-->GET_JSON_Week_Analysis
 GET_JSON_Week_Analysis-->API_Restfull_Ninus
 ```
+
+
+
+# Ninus Rest Api 🐼👨🏾‍💻
+
+<br/>
+<br/>
+
+# Endpoints - Client 🙋🏾‍♂️
+- Criar client
+- Detalhar client
+- Listar clients
+- Editar client  
+- Apagar client
+</br>
+</br>
+
+## Cadastro de Client 🔨
+
+<!-- Endereço do recurso -->
+`POST` - **ninus/api/v1/client**
+
+**Exemplo de Entrada** 
+
+```js
+{
+   
+  "name": "Paula Vasconselos", 
+  "email": "paulinha@gmail.com",
+  "password": "teste123",
+  "school_type": "CEI_PRIVADO"
+
+}
+```
+
+### **Campos da Requisição**
+
+| Campo | Obrigatório | Tipo  | Descrição |
+|-------|-------------|-------|-----------|
+|name   |sim          |texto |O nome do cliente que será usado pelo sistema.
+|email  |sim|texto| O email unico da conta do cliente que servirá como um identificador.
+|password| sim| texto| A senha para poder acessar a conta do cliente, ela será criptografada pelo sistema.
+|school_type|sim|texto|O tipo de centro escolar do usuário.
+
+**Exemplo de Resposta**
+
+```js
+{
+  
+  "id": 1,
+  "name": "Paula Vasconselos",
+  "email": "paulinha@gmail.com",
+  "createdAt": "2023-05-21T17:47:51.0382672",
+  "updatedAt": "2023-05-21T17:47:51.0382672",
+  "school_type": "CEI_PRIVADO",
+  "_links": {
+      "self": {
+          "href": " http://{dominio}/ninus/api/v1/client/1"
+      },
+      "delete": {
+          "href": " http://{dominio}/ninus/api/v1/client/1"
+      },
+      "all": {
+          "href": " http://{dominio}/ninus/api/v1/client"
+      }
+  }
+  
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|201     | O cliente foi criado com sucesso.    |
+|400     | Os dados enviados são inválidos.     |
+
+
+--- 
+
+
+## Detalhar Client 📋
+
+<!-- Endereço do recurso -->
+`GET` - **ninus/api/v1/client/{id}**
+
+**Exemplo de Resposta**
+
+```js
+{
+    "id": 1,
+    "name": "Paula Vasconselos",
+    "email": "paulinha@gmail.com",
+    "createdAt": "2023-05-21T17:47:51.038267",
+    "updatedAt": "2023-05-21T17:47:51.038267",
+    "school_type": "CEI_PRIVADO",
+    "_links": {
+        "self": {
+            "href": http://{dominio}/ninus/api/v1/client/1"
+        },
+        "delete": {
+            "href":  "http://{dominio}/ninus/api/v1/client/1"
+        },
+        "all": {
+            "href": " http://{dominio}/ninus/api/v1/client"
+        }
+    }
+}
+```
+
+
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|200     | Os dados do cliente foram retornados.|
+|400     | Não existe um cliente com esse ID.   | 
+
+</br>
+</br>
+
+---
+
+## Listar Client 📋
+
+<!-- Endereço do recurso -->
+`GET` - **ninus/api/v1/client**
+ou
+`GET` - **ninus/api/v1/client?page={numero_pagina}**
+
+**Exemplo de Resposta** 
+```js
+{
+    "_embedded": {
+        "clientList": [
+            {
+                "id": 1,
+                "name": "Paula Vasconselos",
+                "email": "paulinha@gmail.com",
+                "createdAt": "2023-05-21T17:54:16.347811",
+                "updatedAt": "2023-05-21T17:54:16.347811",
+                "school_type": "CEI_PRIVADO"
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "http://{dominio}/ninus/api/v1/client?page=0&size=5"
+        }
+    },
+    "page": {
+        "size": 5,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
+    }
+}
+```
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados dos clientes foram retornados.  |
+
+
+--- 
+
+
+## Editar Client ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **ninus/api/v1/client/{id}**
+
+**Campos da Requisição** 
+```js
+{
+    "name": "Tatiane Barberino", 
+    "email": "paulinha@gmail.com",
+    "password": "teste",
+    "school_type": "CEI_PRIVADO"
+}
+```
+
+**Exemplo de Resposta** 
+```js
+{
+    "id": 1,
+    "name": "Tatiane Barberino",
+    "email": "paulinha@gmail.com",
+    "createdAt": "2023-05-21T18:11:07.8794563",
+    "updatedAt": "2023-05-21T18:11:07.8884623",
+    "school_type": "CEI_PRIVADO",
+    "_links": {
+        "self": {
+            "href": "http://{dominio}/ninus/api/v1/client/1"
+        },
+        "delete": {
+            "href": "http://{dominio}/ninus/api/v1/client/1"
+        },
+        "all": {
+            "href": "http://{dominio}/ninus/api/v1/client"
+        }
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados do cliente foram retornados.  |
+|400     | Não existe um cliente com esse ID.    |
+
+---
+
+## Deletar Client 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **ninus/api/v1/client/{id}**
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|204     | O cliente foi deletada com sucesso.    |
+|400     | Não existe um cliente com esse ID.    |
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br> 
