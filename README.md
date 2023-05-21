@@ -60,6 +60,7 @@ Módulo_Tela_Cadastro_Aula-->POST_JSON_Model_Input
 POST_JSON_Model_Input-->API_Restfull_Ninus
 API_Restfull_Ninus-->POST_JSON_IA_FILTER
 POST_JSON_IA_FILTER-->API_Rest_Python_IA_Fillter
+API_Rest_Python_IA_Fillter-->Modulo_ML_IA_Filter
 API_Rest_Python_IA_Fillter-->API_Restfull_Ninus
 API_Restfull_Ninus-->insert
 insert-->Módulo_Banco_de_Dados_Ninus
