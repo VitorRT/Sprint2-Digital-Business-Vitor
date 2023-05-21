@@ -311,3 +311,442 @@ ou
 </br>
 </br>
 </br> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Endpoints - Classes 🙋🏾‍♂️
+- Criar class                     ✅
+- Detalhar class                  ✅
+- Listar classes em andamento     ✅
+- Listar classes realizadas       ✅
+- Listar classes favoritas        ✅
+- Editar class                    ✅
+- Realizar class                  ✅
+- Favoritar class                 ✅
+- Apagar class                    ✅
+</br>
+</br>
+
+## Cadastro de Class 🔨
+
+<!-- Endereço do recurso -->
+`POST` - **ninus/api/v1/client**
+
+**Exemplo de Entrada** 
+
+```js
+{
+    "client": {"id": 1},
+    "class_name": "brincadeiras e jogos"
+}
+```
+
+### **Campos da Requisição**
+
+| Campo | Obrigatório | Tipo  | Descrição |
+|-------|-------------|-------|-----------|
+|client   |sim          |objeto |O objeto contendo o id do usuário.
+|class_name  |sim|texto| O nome da aula dado pelo usuário.
+
+
+**Exemplo de Resposta**
+
+```js
+{
+    "id": 1,
+    "client": {
+        "id": 1,
+        "name": "Tatiane Barberino",
+        "school_type": "CEI_PRIVADO"
+    },
+    "class_name": "brincadeiras e jogos",
+    "categorie": "PROGRESS",
+    "createdAt": "2023-05-21T18:11:17.1684869",
+    "updatedAt": "2023-05-21T18:11:17.1684869",
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://{dominio}/ninus/api/v1/class/1"
+        },
+        {
+            "rel": "delete",
+            "href": "http://{dominio}/ninus/api/v1/class/1"
+        },
+        {
+            "rel": "all-progress",
+            "href": "http://{dominio}/ninus/api/v1/class/progress"
+        },
+        {
+            "rel": "all-finished",
+            "href": "http://{dominio}/ninus/api/v1/class/finished"
+        },
+        {
+            "rel": "all-favorite",
+            "href": "http://{dominio}/ninus/api/v1/class/favorite"
+        }
+    ]
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|201     | A aula foi criada com sucesso.       |
+|400     | Os dados enviados são inválidos.     |
+
+
+--- 
+
+
+## Detalhar Classes 📋
+
+<!-- Endereço do recurso -->
+`GET` - **ninus/api/v1/class/{id}**
+
+**Exemplo de Resposta**
+
+```js
+{
+    "id": 1,
+    "client": {
+        "id": 1,
+        "name": "Tatiane Barberino",
+        "school_type": "CEI_PRIVADO"
+    },
+    "class_name": "brincadeiras e jogos",
+    "categorie": "PROGRESS",
+    "createdAt": "2023-05-21T18:11:17.1684869",
+    "updatedAt": "2023-05-21T18:11:17.1684869",
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://{dominio}/ninus/api/v1/class/1"
+        },
+        {
+            "rel": "delete",
+            "href": "http://{dominio}/ninus/api/v1/class/1"
+        },
+        {
+            "rel": "all-progress",
+            "href": "http://{dominio}/ninus/api/v1/class/progress"
+        },
+        {
+            "rel": "all-finished",
+            "href": "http://{dominio}/ninus/api/v1/class/finished"
+        },
+        {
+            "rel": "all-favorite",
+            "href": "http://{dominio}/ninus/api/v1/class/favorite"
+        }
+    ]
+}
+```
+
+
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|200     | Os dados da aula foram retornados.   |
+|400     | Não existe uma aula com esse ID.     | 
+|400     | Não existe um cliente com esse ID.   | 
+
+</br>
+</br>
+
+---
+
+## Listar Classes em andamento (Progress) 📋
+
+<!-- Endereço do recurso -->
+`GET` - **ninus/api/v1/class/progress**
+ou
+`GET` - **ninus/api/v1/class/progress?page={numero_pagina}**
+
+**Exemplo de Resposta** 
+```js
+{
+    "_embedded": {
+        "detailsClassList": [
+            {
+                "id": 1,
+                "client": {
+                    "id": 1,
+                    "name": "Paula Vasconselos",
+                    "school_type": "CEI_PRIVADO"
+                },
+                "class_name": "brincadeiras e jogos",
+                "categorie": "PROGRESS",
+                "createdAt": "2023-05-21T18:48:32.729999",
+                "updatedAt": "2023-05-21T18:48:32.729999",
+                "links": [
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/1"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/1"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/progress"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/finished"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/favorite"
+                    }
+                ]
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "http://{dominio}/ninus/api/v1/class/progress?page=0&size=5"
+        }
+    },
+    "page": {
+        "size": 5,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
+    }
+}
+```
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados das aulas foram retornados.     |
+
+
+--- 
+
+
+## Listar Classes realizadas (finished) 📋
+
+<!-- Endereço do recurso -->
+`GET` - **ninus/api/v1/class/finished**
+ou
+`GET` - **ninus/api/v1/class/finished?page={numero_pagina}**
+
+**Exemplo de Resposta** 
+```js
+{
+    "_embedded": {
+        "detailsClassList": [
+            {
+                "id": 1,
+                "client": {
+                    "id": 1,
+                    "name": "Paula Vasconselos",
+                    "school_type": "CEI_PRIVADO"
+                },
+                "class_name": "brincadeiras e jogos",
+                "categorie": "PROGRESS",
+                "createdAt": "2023-05-21T18:48:32.729999",
+                "updatedAt": "2023-05-21T18:48:32.729999",
+                "links": [
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/1"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/1"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/progress"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/finished"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/favorite"
+                    }
+                ]
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "http://{dominio}/ninus/api/v1/class/finished?page=0&size=5"
+        }
+    },
+    "page": {
+        "size": 5,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
+    }
+}
+```
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados das aulas foram retornados.     |
+
+
+--- 
+
+
+## Listar Classes favoritas (favorite) 📋
+
+<!-- Endereço do recurso -->
+`GET` - **ninus/api/v1/class/favorite**
+ou
+`GET` - **ninus/api/v1/class/favorite?page={numero_pagina}**
+
+**Exemplo de Resposta** 
+```js
+{
+    "_embedded": {
+        "detailsClassList": [
+            {
+                "id": 1,
+                "client": {
+                    "id": 1,
+                    "name": "Paula Vasconselos",
+                    "school_type": "CEI_PRIVADO"
+                },
+                "class_name": "brincadeiras e jogos",
+                "categorie": "PROGRESS",
+                "createdAt": "2023-05-21T18:48:32.729999",
+                "updatedAt": "2023-05-21T18:48:32.729999",
+                "links": [
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/1"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/1"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/progress"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/finished"
+                    },
+                    {
+                        "href": "http://{dominio}/ninus/api/v1/class/favorite"
+                    }
+                ]
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "http://{dominio}/ninus/api/v1/class/favorite?page=0&size=5"
+        }
+    },
+    "page": {
+        "size": 5,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
+    }
+}
+```
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados das aulas foram retornados.     |
+
+
+--- 
+
+
+## Editar Class ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **ninus/api/v1/class/{id}**
+
+**Campos da Requisição** 
+```js
+{
+    "client": {"id": 1},
+    "class_name": "Alabetização"
+}
+```
+
+**Exemplo de Resposta** 
+```js
+{
+    "id": 1,
+    "client": {
+        "id": 1,
+        "name": "Paula Vasconselos",
+        "school_type": "CEI_PRIVADO"
+    },
+    "class_name": "Alabetização",
+    "categorie": "PROGRESS",
+    "createdAt": "2023-05-21T18:52:09.8879978",
+    "updatedAt": "2023-05-21T18:52:09.893996",
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://{dominio}:8080/ninus/api/v1/class/1"
+        },
+        {
+            "rel": "delete",
+            "href": "http://{dominio}/ninus/api/v1/class/1"
+        },
+        {
+            "rel": "all-progress",
+            "href": "http://{dominio}/ninus/api/v1/class/progress"
+        },
+        {
+            "rel": "all-finished",
+            "href": "http://{dominio}/ninus/api/v1/class/finished"
+        },
+        {
+            "rel": "all-favorite",
+            "href": "http://{dominio}/ninus/api/v1/class/favorite"
+        }
+    ]
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados da aula foram retornados.       |
+|400     | Não existe uma aula com esse ID.         |
+
+---
+
+## Deletar Class 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **ninus/api/v1/client/{id}**
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|204     | A aula foi deletada com sucesso.         |
+|400     | Não existe uma aula com esse ID.         |
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br> 
